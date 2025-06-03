@@ -1,0 +1,9 @@
+[package]
+name = "lyri"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+genius_lyrics = "1.0.4"
+megamind = "0.13.0"
+qt = "0.9.3"
