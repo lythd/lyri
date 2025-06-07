@@ -1,14 +1,44 @@
-use qt::Qt;
-use qt::Widgets::QApplication;
+/*
+This file is from https://git.nia.land/nia/lyri
+Copyright (C) 2025 Nia
 
-fn main() {
-	let app = QApplication::new();
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-	let window = Qt::Widgets::QMainWindow::new();
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-	window.setWindowTitle(":3");
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
 
-	window.show();
+//! Sets up the gui
 
-	app.exec();
+use iced::widget::{container, text};
+use iced::{Length, alignment};
+
+fn main() -> iced::Result {
+	iced::run("Lyri", LyriApp::update, LyriApp::view)
+}
+
+type Message = ();
+
+#[derive(Default)]
+struct LyriApp;
+
+impl LyriApp {
+	fn update(&mut self, _message: Message) {}
+
+	fn view(&self) -> iced::Element<Message> {
+		container(text("Hello World"))
+			.height(Length::Fill)
+			.width(Length::Fill)
+			.align_x(alignment::Horizontal::Center)
+			.align_y(alignment::Vertical::Center)
+			.into()
+	}
 }

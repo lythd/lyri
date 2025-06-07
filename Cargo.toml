@@ -5,5 +5,5 @@ edition = "2024"
 
 [dependencies]
 genius_lyrics = "1.0.4"
+iced = "0.13.1"
 megamind = "0.13.0"
-qt = "0.9.3"
