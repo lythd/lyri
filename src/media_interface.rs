@@ -44,19 +44,20 @@ impl MediaInterface {
 	}
 
 	/// Return song url + name if found
-	pub fn find_media(&mut self) -> Option<(String, String)> {
+	pub fn find_media(&mut self) -> (Option<String>, Option<String>) {
 		let player = self.player();
 
 		// no player = no song
 		if player.is_none() {
+			println!("No player :c");
 			return None;
 		}
 
-		// TODO: actually implement
-		// TODO: store TrackList object and call TrackList::reload() to be more performant
 		let player = player.unwrap();
-		let Ok(tracks) = player.get_track_list() else { return None };
-		println!("Tracks:\n{:?}\n:3", player.get_tracks_metadata(tracks.ids()));
-		None
+		let Ok(meta) = player.get_metadata() else {
+			println!("No metadata :c");
+			return None;
+		};
+		(meta.url(), meta.name())
 	}
 }

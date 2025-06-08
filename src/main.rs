@@ -31,7 +31,7 @@ fn main() -> iced::Result {
 	let Some(mut media) = media_interface::MediaInterface::new() else {
 		panic!("Error while creating media interface")
 	};
-	media.find_media();
+	let _ = media.find_media();
 	iced::run("Lyri", LyriApp::update, LyriApp::view)
 }
 
