@@ -34,6 +34,7 @@
               rustc
 			  openssl
 			  pkg-config
+			  dbus
             ];
 
             env.RUSTFLAGS = "-C link-arg=-Wl,-rpath,${nixpkgs.lib.makeLibraryPath dlopenLibraries}";

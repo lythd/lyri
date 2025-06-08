@@ -16,12 +16,22 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-//! Sets up the gui
+//! Lyri is an application to display the current lyrics of whatever song you are listening to and its translation
+//! Its main use is for those interested in language learning, especially if you have a particular favorite song in your target language
+//!
+//! In terms of the program flow, it starts by using mpris to get the current song url+name (the same method that your desktop environment will use)
+// TODO: write out rest of program flow as it gets added
+
+pub mod media_interface;
 
 use iced::widget::{container, text};
 use iced::{Length, alignment};
 
 fn main() -> iced::Result {
+	let Some(mut media) = media_interface::MediaInterface::new() else {
+		panic!("Error while creating media interface")
+	};
+	media.find_media();
 	iced::run("Lyri", LyriApp::update, LyriApp::view)
 }
 
