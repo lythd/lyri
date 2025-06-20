@@ -1,9 +1,8 @@
-[package]
+[workspace]
+members = [
+    "backend",
+    "frontend",
+]
 name = "lyri"
 version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-genius_lyrics = "1.0.4"
-iced = "0.13.1"
-megamind = "0.13.0"
+edition = "2025"
