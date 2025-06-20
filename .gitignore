@@ -80,4 +80,5 @@ fabric.properties
 # Added by cargo
 
 /target
+target/
 flake.lock
