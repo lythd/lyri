@@ -1,7 +1,7 @@
 [workspace]
 members = [
     "backend",
-    "frontend",
+    "iced_frontend",
 ]
 name = "lyri"
 version = "0.1.0"
