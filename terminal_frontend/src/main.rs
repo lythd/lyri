@@ -1,9 +1,8 @@
-use std::error::Error;
 // frontend/src/main.rs (simplified)
 use backend::models::{PlaybackState, SongInfo};
 use backend::song_info_retrieval;
-use tokio::sync::mpsc;
 use std::time::Duration;
+use tokio::sync::mpsc;
 
 #[tokio::main]
 async fn main() {

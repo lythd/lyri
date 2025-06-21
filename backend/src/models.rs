@@ -1,9 +1,22 @@
 use std::time::Duration;
 use mpris::Metadata;
-#[derive(Debug)]
+#[derive(Debug, Clone, Default, PartialEq)]
 pub enum PlaybackState {
+    #[default]
+    None,
     Playing(Duration),
     Paused(Duration),
+}
+
+impl PlaybackState {
+    pub fn same_kind(&self, other: &Self) -> bool {
+        match (self, other) {
+            (PlaybackState::None, PlaybackState::None) => true,
+            (PlaybackState::Playing(_), PlaybackState::Playing(_)) => true,
+            (PlaybackState::Paused(_), PlaybackState::Paused(_)) => true,
+            _ => false,
+        }
+    }
 }
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct SongInfo {
