@@ -2,6 +2,7 @@
 members = [
     "backend",
     "iced_frontend",
+    "terminal_frontend",
 ]
 name = "lyri"
 version = "0.1.0"

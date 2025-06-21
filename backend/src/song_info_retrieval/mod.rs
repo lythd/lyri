@@ -1,10 +1,15 @@
 use std::error::Error;
-use crate::models::SongInfo;
+use std::time::Duration;
+use tokio::sync::mpsc;
+use crate::models::{PlaybackState, SongInfo};
 
 mod mpris;
 
 pub trait SongInfoRetriever {
-    fn get_current_song(&self) -> Result<SongInfo, Box<dyn Error>>;
+    // sends updates to the sender when the currently active song changes
+    fn watch_active_song(&self, sender: mpsc::Sender<SongInfo>) -> Result<(), String>;
+    //sends updates with playback state when the current song changes
+    fn watch_duration(&self, sender: mpsc::Sender<PlaybackState>) -> Result<(), String>;
 }
 
 // Function to get the platform-specific retriever implementation

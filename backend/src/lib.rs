@@ -1,5 +1,5 @@
-mod models;
-mod song_info_retrieval;
+pub mod models;
+pub mod song_info_retrieval;
 
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
