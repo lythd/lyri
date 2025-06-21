@@ -26,16 +26,30 @@ use mpris::PlayerFinder;
 pub struct MediaInterface {
 	/// The mpris player finder
 	finder: PlayerFinder,
+	/// The song url
+	url: Option<String>,
+	/// The song name
+	name: Option<String>,
+	/// The song's image url
+	image_url: Option<String>,
+	/// Whether there is a song and it is playing
+	playing: bool,
 }
 
 impl MediaInterface {
-	/// Constructor method, fails if PlayerFinder::new() returns err
-	pub fn new() -> Option<Self> {
-		let Ok(finder) = PlayerFinder::new() else { return None };
-		Some(Self { finder })
+	/// Constructor method
+	pub fn new() -> Self {
+		let finder = PlayerFinder::new().expect("Could not create PlayerFinder");
+		Self {
+			finder,
+			url: None,
+			name: None,
+			image_url: None,
+			playing: false,
+		}
 	}
 
-	/// Finds the active player
+	/// Finds the active player if one is active
 	pub fn player(&mut self) -> Option<Player> {
 		let Ok(player) = self.finder.find_active() else {
 			return None;
@@ -43,21 +57,91 @@ impl MediaInterface {
 		Some(player)
 	}
 
-	/// Return song url + name if found
-	pub fn find_media(&mut self) -> (Option<String>, Option<String>) {
+	/// Updates media, should be called periodically to ensure fields are accurate
+	pub fn update_media(&mut self) {
 		let player = self.player();
 
 		// no player = no song
 		if player.is_none() {
-			println!("No player :c");
-			return None;
+			self.url = None;
+			self.name = None;
+			self.playing = false;
+			return;
 		}
 
+		self.playing = player.is_running();
+
+		// no metadata
 		let player = player.unwrap();
 		let Ok(meta) = player.get_metadata() else {
-			println!("No metadata :c");
-			return None;
+			self.url = None;
+			self.name = None;
+			return;
 		};
-		(meta.url(), meta.name())
+
+		self.url = meta.url();
+		self.name = meta.name();
+		self.image_url = meta.art_url();
+	}
+
+	pub fn current_song_info(&self) -> (Option<&str>, Option<&str>) {
+		(self.name(), self.image_url())
+	}
+
+	pub fn name(&self) -> Option<&str> {
+		Some(&self.name?)
+	}
+
+	pub fn url(&self) -> Option<&str> {
+		Some(&self.url?)
+	}
+
+	pub fn image_url(&self) -> Option<&str> {
+		Some(&self.image_url?)
+	}
+
+	pub fn get_lyrics(&self) -> Option<(String, String)> {
+		// TODO!!!!
+		Some((String::from("Original..."), String::from("Translated...")))
+	}
+
+	pub fn is_playing(&self) -> bool {
+		self.is_playing
+	}
+
+	pub fn play(&mut self) {
+		// nothing to do if there is no player
+		let Some(player) = self.player() else {
+			return;
+		};
+
+		player.play();
+	}
+
+	pub fn pause(&mut self) {
+		// nothing to do if there is no player
+		let Some(player) = self.player() else {
+			return;
+		};
+
+		player.pause();
+	}
+
+	pub fn next(&mut self) {
+		// nothing to do if there is no player
+		let Some(player) = self.player() else {
+			return;
+		};
+
+		player.next();
+	}
+
+	pub fn prev(&mut self) {
+		// nothing to do if there is no player
+		let Some(player) = self.player() else {
+			return;
+		};
+
+		player.previous();
 	}
 }
