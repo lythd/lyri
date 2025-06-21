@@ -51,6 +51,7 @@ impl App {
             let mut current_song_info = SongInfo::default();
             loop {
                 sleep(Duration::from_millis(500)).await;
+                
                 if let Some(info) = song_retriever.get_active_song() {
                     if current_song_info != info {
                         current_song_info = info.clone();
@@ -67,6 +68,7 @@ impl App {
             let mut was_last_paused = false;
             loop {
                 sleep(Duration::from_millis(500)).await;
+                
                 if let Some(state) = song_retriever.get_playback_duration() {
                     if state.same_kind(&PlaybackState::Paused(Duration::default())) && !was_last_paused {
                         was_last_paused = true;

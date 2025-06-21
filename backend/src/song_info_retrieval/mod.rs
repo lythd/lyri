@@ -7,6 +7,7 @@ mod mpris;
 
 pub trait SongInfoRetriever: Send + Sync {
     fn get_active_song(&self) -> Option<SongInfo>;
+    //gets playback duration on currently playing song
     fn get_playback_duration(&self) -> Option<PlaybackState>;
 }
 
