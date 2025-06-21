@@ -25,6 +25,7 @@ pub struct SongInfo {
     pub album_name: Option<String>,
     pub duration_ms: Option<Duration>,
     pub url: Option<String>,
+    pub art_url: Option<String>
 }
 
 impl SongInfo {
@@ -35,6 +36,7 @@ impl SongInfo {
             album_name: metadata.album_name().map(|s| s.to_string()),
             duration_ms: metadata.length(),
             url: metadata.url().map(|s| s.to_string()),
+            art_url: metadata.art_url().map(|s| s.to_string()),
         }
     }
 }
