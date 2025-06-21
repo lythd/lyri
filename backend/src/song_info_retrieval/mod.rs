@@ -5,12 +5,9 @@ use crate::models::{PlaybackState, SongInfo};
 
 mod mpris;
 
-pub trait SongInfoRetriever {
-    // TODO use cancelation tokens in the threads spawned in here
-    // sends updates to the sender when the currently active song changes
-    fn watch_active_song(&self, sender: mpsc::Sender<SongInfo>) -> Result<(), String>;
-    //sends updates with playback state when the current song changes
-    fn watch_duration(&self, sender: mpsc::Sender<PlaybackState>) -> Result<(), String>;
+pub trait SongInfoRetriever: Send + Sync {
+    fn get_active_song(&self) -> Option<SongInfo>;
+    fn get_playback_duration(&self) -> Option<PlaybackState>;
 }
 
 // Function to get the platform-specific retriever implementation

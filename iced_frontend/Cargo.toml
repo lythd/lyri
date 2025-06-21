@@ -1,7 +1,11 @@
 [package]
 name = "iced_frontend"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
 iced = "0.13.1"
+backend = { path = "../backend" }
+tokio = { version = "1.0", features = ["default"] }
+futures = "0.3"
+async-stream = "0.3"

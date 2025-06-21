@@ -1,9 +1,8 @@
 [workspace]
 members = [
-    "backend",
+    "backend", "gtk_frontend",
     "iced_frontend",
     "terminal_frontend",
 ]
 name = "lyri"
 version = "0.1.0"
-edition = "2025"
