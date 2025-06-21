@@ -69,19 +69,27 @@ impl MediaInterface {
 			return;
 		}
 
-		self.playing = player.is_running();
-
 		// no metadata
 		let player = player.unwrap();
+		self.playing = player.is_running();
 		let Ok(meta) = player.get_metadata() else {
 			self.url = None;
 			self.name = None;
 			return;
 		};
 
-		self.url = meta.url();
-		self.name = meta.name();
-		self.image_url = meta.art_url();
+		self.url = match meta.url() {
+			Some(s) => Some(s.to_string()),
+			None => None,
+		};
+		self.name = match meta.title() {
+			Some(s) => Some(s.to_string()),
+			None => None,
+		};
+		self.image_url = match meta.art_url() {
+			Some(s) => Some(s.to_string()),
+			None => None,
+		};
 	}
 
 	pub fn current_song_info(&self) -> (Option<&str>, Option<&str>) {
@@ -89,15 +97,24 @@ impl MediaInterface {
 	}
 
 	pub fn name(&self) -> Option<&str> {
-		Some(&self.name?)
+		match &self.name {
+			Some(s) => Some(s),
+			None => None,
+		}
 	}
 
 	pub fn url(&self) -> Option<&str> {
-		Some(&self.url?)
+		match &self.url {
+			Some(s) => Some(s),
+			None => None,
+		}
 	}
 
 	pub fn image_url(&self) -> Option<&str> {
-		Some(&self.image_url?)
+		match &self.image_url {
+			Some(s) => Some(s),
+			None => None,
+		}
 	}
 
 	pub fn get_lyrics(&self) -> Option<(String, String)> {
@@ -106,7 +123,7 @@ impl MediaInterface {
 	}
 
 	pub fn is_playing(&self) -> bool {
-		self.is_playing
+		self.playing
 	}
 
 	pub fn play(&mut self) {
@@ -115,7 +132,7 @@ impl MediaInterface {
 			return;
 		};
 
-		player.play();
+		let _ = player.play();
 	}
 
 	pub fn pause(&mut self) {
@@ -124,7 +141,7 @@ impl MediaInterface {
 			return;
 		};
 
-		player.pause();
+		let _ = player.pause();
 	}
 
 	pub fn next(&mut self) {
@@ -133,7 +150,7 @@ impl MediaInterface {
 			return;
 		};
 
-		player.next();
+		let _ = player.next();
 	}
 
 	pub fn prev(&mut self) {
@@ -142,6 +159,6 @@ impl MediaInterface {
 			return;
 		};
 
-		player.previous();
+		let _ = player.previous();
 	}
 }

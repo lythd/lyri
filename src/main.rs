@@ -24,14 +24,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 pub mod media_interface;
 
+use crate::media_interface::MediaInterface;
+
 use iced::widget::{container, text};
 use iced::{Length, alignment};
 
 fn main() -> iced::Result {
-	let Some(mut media) = media_interface::MediaInterface::new() else {
-		panic!("Error while creating media interface")
-	};
-	let _ = media.find_media();
+	let mut media = MediaInterface::new();
 	iced::run("Lyri", LyriApp::update, LyriApp::view)
 }
 
