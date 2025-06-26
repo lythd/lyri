@@ -1,18 +1,21 @@
-use std::error::Error;
-use std::time::Duration;
-use tokio::sync::mpsc;
 use crate::models::{PlaybackState, SongInfo};
+use std::error::Error;
 
 mod mpris;
 
-pub trait SongInfoRetriever: Send + Sync {
+pub trait PlatformSongInterface: Send + Sync {
     fn get_active_song(&self) -> Option<SongInfo>;
     //gets playback duration on currently playing song
     fn get_playback_duration(&self) -> Option<PlaybackState>;
+    fn play(&self) -> bool;
+    fn pause(&self) -> bool;
+    fn next(&self) -> bool;
+    fn prev(&self) -> bool;
+
 }
 
 // Function to get the platform-specific retriever implementation
-pub fn get_platform_retriever() -> Box<dyn SongInfoRetriever> {
+pub fn get_platform_retriever() -> Box<dyn PlatformSongInterface> {
     #[cfg(target_os = "linux")]
     {
         Box::new(mpris::MprisRetriever::new().unwrap())

@@ -5,7 +5,7 @@ use backend::song_info_retrieval;
 use std::time::Duration;
 use tokio::sync::mpsc;
 use tokio::time::sleep;
-use backend::song_info_retrieval::SongInfoRetriever;
+use backend::song_info_retrieval::PlatformSongInterface;
 
 enum Message {
     UpdateSong(SongInfo),
@@ -39,7 +39,7 @@ async fn main() {
     println!("Shutting down.");
 }
 struct App {
-    song_retriever: Arc<Box<dyn SongInfoRetriever>>
+    song_retriever: Arc<Box<dyn PlatformSongInterface>>
 }
 impl App {
     fn new() -> App{
