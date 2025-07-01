@@ -1,11 +1,13 @@
 use std::sync::Arc;
 // frontend/src/main.rs (simplified)
 use backend::models::{PlaybackState, SongInfo};
-use backend::song_info_retrieval;
+use backend::platform_song_interface;
+use backend::get_lyrics;
 use std::time::Duration;
 use tokio::sync::mpsc;
 use tokio::time::sleep;
-use backend::song_info_retrieval::PlatformSongInterface;
+use backend::get_lyrics::get_lyrics;
+use backend::platform_song_interface::PlatformSongInterface;
 
 enum Message {
     UpdateSong(SongInfo),
@@ -27,8 +29,13 @@ async fn main() {
 
     while let Some(message) = rx_message.recv().await {
         if let Message::UpdateSong(info) = message {
-            if let Some(title) = info.title {
+            if let Some(title) = &info.title {
                 println!("UI: New Song! {}", title);
+                if let Some(res) = get_lyrics(&info).await {
+                    println!("{}", res);
+                } else {
+                    println!("Could not get lyrics for {}", title);
+                }
             }
         } else if let Message::UpdatePlayback(playback) = message {
             println!("Playback updated {playback:?}");
@@ -43,7 +50,7 @@ struct App {
 }
 impl App {
     fn new() -> App{
-        App {song_retriever: Arc::new(song_info_retrieval::get_platform_retriever())    }
+        App {song_retriever: Arc::new(platform_song_interface::get_platform_retriever())    }
     }
     fn watch_active_song(&self, sender: mpsc::Sender<Message>) -> Result<(), String> {
         let song_retriever = Arc::clone(&self.song_retriever);

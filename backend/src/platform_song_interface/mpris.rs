@@ -1,5 +1,5 @@
 use crate::models::{PlaybackState, SongInfo};
-use crate::song_info_retrieval::PlatformSongInterface;
+use crate::platform_song_interface::PlatformSongInterface;
 use mpris::{PlaybackStatus, PlayerFinder};
 use std::error::Error;
 use std::sync::{Arc, Mutex};

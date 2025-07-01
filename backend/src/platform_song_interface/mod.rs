@@ -22,11 +22,11 @@ pub fn get_platform_retriever() -> Box<dyn PlatformSongInterface> {
     }
     #[cfg(target_os = "windows")]
     {
+        // TODO 
         Box::new(gsmtc::GsmtcRetriever::new())
     }
     #[cfg(not(any(target_os = "linux", target_os = "windows")))]
     {
-        // Fallback for unsupported OS, or return an error
-        Box::new(unsupported::UnsupportedRetriever)
+        panic!("unsuported os");
     }
 }
