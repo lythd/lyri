@@ -1,5 +1,6 @@
 pub mod models;
-pub mod song_info_retrieval;
+pub mod platform_song_interface;
+pub mod get_lyrics;
 
 pub fn add(left: u64, right: u64) -> u64 {
     left + right

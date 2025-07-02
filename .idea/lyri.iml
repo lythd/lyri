@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/backend/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iced-frontend/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/gtk_frontend/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/iced_frontend/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/terminal_frontend/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/backend/target" />
