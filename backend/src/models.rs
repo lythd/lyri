@@ -40,3 +40,16 @@ impl SongInfo {
         }
     }
 }
+
+pub struct SyncedSongLyrics {
+    pub lines: Vec<SongLine>
+}
+pub struct SongLine {
+    pub duration: Duration,
+    pub user_line: String,
+    pub translation_line: TranslationLine,
+}
+pub struct TranslationLine {
+    // units of meaning, in both the songs language and the users language
+    pub morphemes: Vec<(String,String)>
+}

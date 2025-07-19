@@ -3,8 +3,9 @@ use lrclib_api_rs::LRCLibAPI;
 use reqwest::{Client, Url};
 use std::str::FromStr;
 use http::Method;
-
-pub async fn get_lyrics(song_info: &SongInfo) -> Option<String> {
+// TODO: create song lyrics representation that will separate the song language into "words"
+// and then translate each word into the users language, then highlight the "words"  so that the user can see definitions for each word 
+pub async fn get_synced_lyrics(song_info: &SongInfo) -> Option<String> {
     let api = LRCLibAPI::new();
     let title = song_info.title.as_deref()?;
     

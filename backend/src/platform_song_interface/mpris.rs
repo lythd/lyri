@@ -112,7 +112,7 @@ impl PlatformSongInterface for MprisRetriever {
             (*player_identity_guard).clone()
         };
         if let Ok(finder) = PlayerFinder::new() {
-            if let Ok(player) = finder.find_by_name((player_identity.as_str())) {
+            if let Ok(player) = finder.find_by_name(player_identity.as_str()) {
                 if let Ok(()) = player.previous() {
                     return true;
                 }
