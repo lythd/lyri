@@ -29,7 +29,7 @@ pub struct SongInfo {
 }
 
 impl SongInfo {
-    pub fn from_mpris_metadata(metadata: Metadata) -> SongInfo {
+    pub fn from_mpris_metadata(metadata: Metadata) -> Self {
         SongInfo {
             title: metadata.title().map(|s| s.to_string()),
             artists: metadata.artists().map(|s| s.iter().map(|s| s.to_string()).collect()),
@@ -39,17 +39,4 @@ impl SongInfo {
             art_url: metadata.art_url().map(|s| s.to_string()),
         }
     }
-}
-
-pub struct SyncedSongLyrics {
-    pub lines: Vec<SongLine>
-}
-pub struct SongLine {
-    pub duration: Duration,
-    pub user_line: String,
-    pub translation_line: TranslationLine,
-}
-pub struct TranslationLine {
-    // units of meaning, in both the songs language and the users language
-    pub morphemes: Vec<(String,String)>
 }

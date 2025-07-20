@@ -2,11 +2,10 @@ use std::sync::Arc;
 // frontend/src/main.rs (simplified)
 use backend::models::{PlaybackState, SongInfo};
 use backend::platform_song_interface;
-use backend::get_lyrics;
 use std::time::Duration;
 use tokio::sync::mpsc;
 use tokio::time::sleep;
-use backend::get_lyrics::{get_synced_lyrics};
+use backend::lyrics::get_lyrics::{get_synced_lyrics};
 use backend::platform_song_interface::PlatformSongInterface;
 
 enum Message {
@@ -31,8 +30,8 @@ async fn main() {
         if let Message::UpdateSong(info) = message {
             if let Some(title) = &info.title {
                 println!("UI: New Song! {}", title);
-                if let Some(res) = get_synced_lyrics(&info).await {
-                    println!("{}", res);
+                if let Ok(res) = get_synced_lyrics(&info).await {
+                    println!("{:?}", res);
                 } else {
                     println!("Could not get lyrics for {}", title);
                 }
