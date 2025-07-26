@@ -5,4 +5,8 @@ edition = "2021"
 
 [dependencies]
 backend = { path = "../backend" }
-gtk = { version = "0.9.7", package = "gtk4" }
+gtk = { version = "0.10.0", package = "gtk4", features = ["v4_18"] }
+adw = { version = "0.8.0", package = "libadwaita", features = ["v1_5"] }
+
+[build-dependencies]
+glib-build-tools = "0.21.0"

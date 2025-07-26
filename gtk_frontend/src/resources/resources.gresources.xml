@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/land/nia/lyri/">
+    <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
+    <file>assets/icon.png</file>
+    <file>assets/music.png</file>
+    <file>assets/next.png</file>
+    <file>assets/pause.png</file>
+    <file>assets/play.png</file>
+    <file>assets/prev.png</file>
+    <file>assets/settings.png</file>
+  </gresource>
+</gresources>

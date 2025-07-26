@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+
+  <object class="GtkWindow" id="main_window">
+    <property name="default-width">800</property>
+    <property name="default-height">200</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="vexpand">true</property>
+        <property name="hexpand">true</property>
+        <child>
+          <object class="GtkPaned" id="main_paned">
+            <property name="orientation">horizontal</property>
+            <child>
+              <object class="GtkBox" id="left_section">
+                <property name="orientation">vertical</property>
+                <property name="vexpand">true</property>
+                <property name="hexpand">true</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="margin-start">6</property>
+                <property name="margin-end">6</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">6</property>
+                <child>
+                  <object class="GtkImage" id="thumbnail">
+                    <property name="resource">/land/nia/lyri/assets/music.png</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="title_label">
+                    <property name="label">Unknown song title...</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="right_section">
+                <property name="orientation">vertical</property>
+                <property name="vexpand">false</property>
+                <property name="hexpand">true</property>
+                <child>
+                  <object class="GtkBox" id="main_text_section">
+                    <property name="orientation">vertical</property>
+                    <property name="vexpand">true</property>
+                    <property name="hexpand">true</property>
+                    <property name="margin-start">6</property>
+                    <property name="margin-end">6</property>
+                    <property name="margin-top">6</property>
+                    <property name="margin-bottom">6</property>
+                    <child>
+                      <object class="GtkBox" id="top_lyric_section">
+                        <property name="vexpand">true</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkLabel" id="top_lyric_text">
+                            <property name="label">Native lyrics...</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="bottom_lyric_section">
+                        <property name="vexpand">true</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkLabel" id="bottom_lyrics_text">
+                            <property name="label">Translated lyrics...</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSeparator"/>
+                </child>
+                <child>
+                  <object class="GtkRevealer" id="bottom_revealer">
+                    <property name="reveal-child">true</property>
+                    <child>
+                      <object class="GtkBox" id="bottom_button_box">
+                        <property name="orientation">horizontal</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="margin-top">6</property>
+                        <property name="margin-bottom">6</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkButton" id="prev_button">
+                            <child>
+                              <object class="GtkImage">
+                                <property name="resource">/land/nia/lyri/assets/prev.png</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="play_button">
+                            <child>
+                              <object class="GtkImage" id="play_button_icon">
+                                <property name="resource">/land/nia/lyri/assets/play.png</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="next_button">
+                            <child>
+                              <object class="GtkImage">
+                                <property name="resource">/land/nia/lyri/assets/next.png</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="settings_button">
+                            <child>
+                              <object class="GtkImage">
+                                <property name="resource">/land/nia/lyri/assets/settings.png</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
